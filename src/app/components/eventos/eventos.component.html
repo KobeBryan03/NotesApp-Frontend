@@ -1,0 +1,98 @@
+<h1 class="text-center text-capitalize">Administra tus eventos</h1>
+
+<p class="my-1 text-center">Planifica mejor tu vida con este practico almacenador de eventos que ta ayudará a mejorar tu manejo del tiempo </p>
+
+<button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#modalCreate">Crear
+
+<h2 class="text-center font-weight-bold">Listado Eventos</h2>
+
+<div class="row">
+    <div class="col-12 col-l6-6">
+        <h2 class="text-center">Lista de eventos</h2>
+        <table class="table table-striped" id="datos">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Lugar</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row">Lorem, ipsum dolor.</td>
+                    <td>Nihil, officia vero.</td>
+                    <td>12 diciembre 2022</td>
+                    <td>2:00:00 pm</td>
+                    <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalUpdate">Editar</button>
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">Eliminar</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-12 col-l6-6"></div>
+</div>
+
+
+
+
+<!-- Modal create -->
+<!-- Button trigger modal -->
+<div class="modal fade" id="modalUpdate" tabindex="-1" aria-labelledby="modalUpdateLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form method="post" enctype="multipart/form-data" class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalUpdateLabel">Crear Evento</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="my-1" for="evento">Evento</label>
+                    <input type="text" name="evento" required id="evento" class="form-control" placeholder="Nombre del evento"
+                        aria-describedby="helpId">
+                </div>
+                <div class="form-group">
+                    <label class="my-1" for="lugar">Lugar</label>
+                    <input type="text" name="lugar" required id="lugar" class="form-control" placeholder="Lugar del evento"
+                        aria-describedby="helpId">
+                </div>
+                <div class="form-group">
+                    <label class="my-1" for="fecha">Fecha</label>
+                    <input type="date" name="fecha" required id="fecha" class="form-control" placeholder="Fecha del evento"
+                        aria-describedby="helpId">
+                </div>
+                <div class="form-group">
+                    <label class="my-1" for="hora">Hora</label>
+                    <input type="time" name="hora" id="hora" class="form-control" placeholder="Hora del evento"
+                        aria-describedby="helpId">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- modal Eliminar -->
+<div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form method="delete" class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalEliminarLabel">Eliminar Evento</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estas seguro de eliminar el evento?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+            </div>
+        </form>
+    </div>
+</div>
