@@ -34,69 +34,54 @@ export class NotasComponent implements OnInit {
       let notaBindeada = this.listaNotas.filter(nota => nota.id === id)[0];
       this.notaEditar = JSON.parse(JSON.stringify(notaBindeada));
       this.category = this.listaCategorias.filter(el => el.id === this.notaEditar.category_id)[0];
-      console.log(this.category, this.listaCategorias, this.notaEditar)
-    }
-  }
-  cargaEliminarNota(id?: string) {
-    if (id === undefined) {
-      this.notaEditar = new Nota();
-    } else {
-      let notaBindeada = this.listaNotas.filter(nota => nota.id === id)[0];
-      this.notaEditar = JSON.parse(JSON.stringify(notaBindeada));
     }
   }
 
   crearNota() {
     let nota: Nota = JSON.parse(JSON.stringify(this.nota));
     nota.status = 4;
-    nota.userId = "userRandom";
+    nota.userId = "userRandom"; // temporal mientra se implementa login
     try {
-      console.log(this.nota)
-      let notaServer = this.notasService.createNota(nota).subscribe(nota => {
+      let notaServer = this.notasService.create(nota).subscribe(nota => {
         this.listaNotas.push(nota);
         this.nota = new Nota();
       })
     } catch (e) {
-      console.warn("fallo en creacion", e);
     }
   }
 
-  editarNota(id?: string) {
-    if (!id) return console.log("la id no existe")
+  editarNota() {
     try {
-      this.notasService.getNota(id).subscribe(nota=>{
-        this.notasService.updateNota(nota).subscribe(data => {
-          this.listaNotas[this.listaNotas.findIndex(el => el.id === nota.id)] = nota;
+        this.notasService.update(this.notaEditar).subscribe(data => {
+          let index = this.listaNotas.findIndex(el => el.id === this.notaEditar.id)
+          this.listaNotas[index] = this.notaEditar;
           this.notaEditar = new Nota();
-        })
       })
     } catch (e) {
-      console.warn(e);
     }
 
   }
 
-  eliminarNota(id?: string) {
+  eliminarNota() {
     try {
-      if (id === undefined) throw new Error("id no valida");
-      this.notasService.deleteNota(id).subscribe(data => {
-        this.listaNotas = this.listaNotas.filter(nota => nota.id !== id);
+      if (this.notaEditar.id === undefined) throw new Error("id no valida");
+      this.notasService.delete(this.notaEditar.id).subscribe(data => {
+        let index = this.listaNotas.findIndex(el => el.id === this.notaEditar.id);
+        this.listaNotas.splice(index, 1);
       })
     } catch (err: any) {
-      console.warn("ocurrio un error al eliminar", err.getMessage());
     }
   }
 
 
 
   ngOnInit() {
-    this.notasService.getNotas().subscribe(data => {
+    this.notasService.getAll().subscribe(data => {
       this.listaNotas = Object.values(data);
     })
 
     this.notasService.getCategorias().subscribe(categorias => {
       this.listaCategorias = Object.values(categorias);
-      console.log(categorias)
     })
   }
 
