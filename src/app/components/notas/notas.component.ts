@@ -52,9 +52,15 @@ export class NotasComponent implements OnInit {
 
   editarNota() {
     try {
+<<<<<<< HEAD
         this.notasService.update(this.notaEditar).subscribe(data => {
           let index = this.listaNotas.findIndex(el => el.id === this.notaEditar.id)
           this.listaNotas[index] = this.notaEditar;
+=======
+      this.notasService.get(id).subscribe(nota=>{
+        this.notasService.update(nota).subscribe(data => {
+          this.listaNotas[this.listaNotas.findIndex(el => el.id === nota.id)] = nota;
+>>>>>>> c6dbeea68ff17dee5f75a032ccc499fe4b083906
           this.notaEditar = new Nota();
       })
     } catch (e) {
@@ -64,10 +70,16 @@ export class NotasComponent implements OnInit {
 
   eliminarNota() {
     try {
+<<<<<<< HEAD
       if (this.notaEditar.id === undefined) throw new Error("id no valida");
       this.notasService.delete(this.notaEditar.id).subscribe(data => {
         let index = this.listaNotas.findIndex(el => el.id === this.notaEditar.id);
         this.listaNotas.splice(index, 1);
+=======
+      if (id === undefined) throw new Error("id no valida");
+      this.notasService.delete(id).subscribe(data => {
+        this.listaNotas = this.listaNotas.filter(nota => nota.id !== id);
+>>>>>>> c6dbeea68ff17dee5f75a032ccc499fe4b083906
       })
     } catch (err: any) {
     }
