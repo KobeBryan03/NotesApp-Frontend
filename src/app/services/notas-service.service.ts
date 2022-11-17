@@ -14,31 +14,31 @@ export class NotasServiceService {
   constructor(private http: HttpClient) {
 
   }
-  getNotas(): Observable<Nota> {
+  getAll(): Observable<Nota> {
     return this.http.get(this.url, {
       headers: { "Content-Type": "application/json" }
     })
   }
 
-  getNota(id: string) : Observable<Nota> {
+  get(id: string) : Observable<Nota> {
     return this.http.get(`${this.url}/${id}`, {
       headers: { "Content-Type": "application/json", "charset":"utf-8" },
     })
   }
 
-  createNota(nota: Nota) {
+  create(nota: Nota) {
     return this.http.post(this.url, nota, {
       headers: { "Content-Type": "application/json", "charset":"utf-8" },
     });
   }
 
-  updateNota(nota: Nota) : Observable<Nota> {
+  update(nota: Nota) : Observable<Nota> {
     return this.http.put(`${this.url}/${nota.id}`, nota, {
       headers: { "Content-Type": "application/json", "charset":"utf-8" },
     })
   }
 
-  deleteNota(id: string) : Observable<Nota> {
+  delete(id: string) : Observable<Nota> {
     return this.http.delete(`${this.url}/${id}`, {
       headers: { "Content-Type": "application/json", "charset":"utf-8" },
     })

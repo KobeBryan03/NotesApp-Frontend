@@ -52,7 +52,7 @@ export class NotasComponent implements OnInit {
     nota.userId = "userRandom";
     try {
       console.log(this.nota)
-      let notaServer = this.notasService.createNota(nota).subscribe(nota => {
+      let notaServer = this.notasService.create(nota).subscribe(nota => {
         this.listaNotas.push(nota);
         this.nota = new Nota();
       })
@@ -64,8 +64,8 @@ export class NotasComponent implements OnInit {
   editarNota(id?: string) {
     if (!id) return console.log("la id no existe")
     try {
-      this.notasService.getNota(id).subscribe(nota=>{
-        this.notasService.updateNota(nota).subscribe(data => {
+      this.notasService.get(id).subscribe(nota=>{
+        this.notasService.update(nota).subscribe(data => {
           this.listaNotas[this.listaNotas.findIndex(el => el.id === nota.id)] = nota;
           this.notaEditar = new Nota();
         })
@@ -79,7 +79,7 @@ export class NotasComponent implements OnInit {
   eliminarNota(id?: string) {
     try {
       if (id === undefined) throw new Error("id no valida");
-      this.notasService.deleteNota(id).subscribe(data => {
+      this.notasService.delete(id).subscribe(data => {
         this.listaNotas = this.listaNotas.filter(nota => nota.id !== id);
       })
     } catch (err: any) {
@@ -90,13 +90,12 @@ export class NotasComponent implements OnInit {
 
 
   ngOnInit() {
-    this.notasService.getNotas().subscribe(data => {
+    this.notasService.getAll().subscribe(data => {
       this.listaNotas = Object.values(data);
     })
 
     this.notasService.getCategorias().subscribe(categorias => {
       this.listaCategorias = Object.values(categorias);
-      console.log(categorias)
     })
   }
 
