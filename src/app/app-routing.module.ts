@@ -8,6 +8,7 @@ const routes: Routes = [
   {path: "", component: HomeComponent},
   {path: "notas", component: NotasComponent},
   {path: "eventos", component: EventosComponent},
+  {path: "seguridad", loadChildren: ()=> import ("src/app/modules/seguridad/seguridad.module").then(res => res.SeguridadModule)},
 ];
 
 @NgModule({

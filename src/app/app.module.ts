@@ -8,6 +8,7 @@ import { EventosComponent } from './components/eventos/eventos.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
+import { NavBarComponent } from './plantilla/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { HomeComponent } from './components/home/home.component';
     NotasComponent,
     EventosComponent,
     HomeComponent,
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,
