@@ -64,6 +64,7 @@ export class NotasComponent implements OnInit {
 
   eliminarNota() {
     try {
+
       if (this.notaEditar.id === undefined) throw new Error("id no valida");
       this.notasService.delete(this.notaEditar.id).subscribe(data => {
         let index = this.listaNotas.findIndex(el => el.id === this.notaEditar.id);
