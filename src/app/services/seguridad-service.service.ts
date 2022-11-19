@@ -22,7 +22,6 @@ export class SeguridadServiceService {
   }
 
   validarSesion(){
-    console.log("Token: ", this.getItemStorage("token"))
     if(this.getItemStorage("token")) this.sesionIniciada.next(true);
   }
 
@@ -34,6 +33,11 @@ export class SeguridadServiceService {
   cerrarSesion(){
     this.clearStorage();
     this.sesionIniciada.next(false);
+  }
+
+  getToken(): string|null{
+    if(!this.sesionIniciada) return null;
+    return this.getItemStorage("token");
   }
 
   addItemStorge(key: string, value: string){

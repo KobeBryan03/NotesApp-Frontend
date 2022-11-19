@@ -2,9 +2,50 @@
 <p class="my-1 text-center">Administra la informacion que has subido en tus notas de forma agil con esta seccion de la aplicación que te permite leer editar y eliminar tus notas en poco tiempo</p>
 
 
+<!-- mensajes de error -->
+<div class="container my-2">
+    <div *ngIf="infoUsuario" class="alert alert-{{infoUsuario[1]}} d-flex flex-no-wrap justify-content-between align-items-center" role="alert">
+        <span>{{infoUsuario[0]}}</span>
+        <span class="btn" (click)="resetError()">X</span>
+    </div>
+</div>
 
-<div class="container-fliud my-2">
+<div class="container my-2">
     <div class="row">
+        <div class="col-12 col-lg-6">
+            <form>
+                <h3 class="text-center">Crear Nota</h3>
+                <div class="form-group my-1">
+                    <label class="my-1" for="titulo">Titulo</label>
+                    <input type="text" [(ngModel)]="nota.title" maxlength="30" name="titulo" required
+                        id="titulo" class="form-control" placeholder="Titulo..." aria-describedby="helpId">
+                </div>
+
+                <div class="form-group my-1">
+                    <label class="my-1" for="category-id">Categoria</label>
+                    <select name="category-id" required id="category-id" value="{{nota.category_id}}" [(ngModel)]="nota.category_id" class="form-control">
+                        <option *ngFor="let category of listaCategorias" value="{{category.id}}">{{category.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group my-1">
+                    <label class="my-1" for="status-id-update">Estatus</label>
+                    <select name="status-id" id="status-id" [(ngModel)]="nota.status" class="form-control">
+                        <option *ngFor="let status of listaStatus" value="{{status.id}}">{{status.name}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group my-1">
+                    <label class="my-1" for="contenido">Nota</label>
+                    <textarea name="contenido" maxlength="3000" [(ngModel)]="nota.body" placeholder="Escribe tu nota aqui..."
+                        id="contenido" required class="form-control"
+                        style="max-height: 200px; height: 8em;"></textarea>
+                </div>
+                <div class="form-group my-1">
+                    <button type="button" class="btn btn-primary me-1" (click)="crearNota()">Guardar</button>
+                    <button type="reset" class="btn btn-secundary">Limpiar</button>
+                </div>
+            </form>
+        </div>
         <div class="col-12 col-lg-6">
             <h2 class="text-center font-weight-bold">Lista de notas</h2>
 
@@ -26,35 +67,6 @@
                 </tbody>
             </table>
         </div>
-
-        <div class="col-12 col-lg-6">
-            <form>
-                <h3 class="text-center">Crear Nota</h3>
-                <div class="form-group my-1">
-                    <label class="my-1" for="titulo">Titulo</label>
-                    <input type="text" [(ngModel)]="nota.title" name="titulo" required
-                        id="titulo" class="form-control" placeholder="Titulo..." aria-describedby="helpId">
-                </div>
-
-                <div class="form-group my-1">
-                    <label class="my-1" for="category-id">Categoria</label>
-                    <select name="category-id" required id="category-id" value="{{nota.category_id}}" [(ngModel)]="nota.category_id" class="form-control">
-                        <option *ngFor="let category of listaCategorias" value="{{category.id}}">{{category.name}}</option>
-                    </select>
-                </div>
-
-                <div class="form-group my-1">
-                    <label class="my-1" for="contenido">Nota</label>
-                    <textarea name="contenido" [(ngModel)]="nota.body" placeholder="Escribe tu nota aqui..."
-                        id="contenido" required class="form-control"
-                        style="max-height: 200px; height: 8em;"></textarea>
-                </div>
-                <div class="form-group my-1">
-                    <button type="button" class="btn btn-primary me-1" (click)="crearNota()">Guardar</button>
-                    <button type="reset" class="btn btn-secundary">Limpiar</button>
-                </div>
-            </form>
-        </div>
     </div>
 </div>
 
@@ -73,7 +85,7 @@
                 <input type="hidden" [(ngModel)]="notaEditar.id" name="id">
                 <div class="form-group">
                     <label class="my-1" for="titulo">Titulo</label>
-                    <input type="text" [(ngModel)]="notaEditar.title" value="notaEditar.title" name="titulo" required
+                    <input type="text" maxlength="30" [(ngModel)]="notaEditar.title" value="notaEditar.title" name="titulo" required
                         id="titulo-update" class="form-control" placeholder="Titulo..." aria-describedby="helpId">
                 </div>
                 <div class="form-group my-1">
@@ -82,10 +94,16 @@
                         <option *ngFor="let category of listaCategorias" value="{{category.id}}">{{category.name}}</option>
                     </select>
                 </div>
+                <div class="form-group my-1">
+                    <label class="my-1" for="status-id-update">Estatus</label>
+                    <select name="status-id" id="status-id-update" [(ngModel)]="notaEditar.status" class="form-control">
+                        <option *ngFor="let status of listaStatus" value="{{status.id}}">{{status.name}}</option>
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <label class="my-1" for="contenido">Nota</label>
-                    <textarea name="contenido" [(ngModel)]="notaEditar.body" placeholder="Escribe tu nota aqui..."
+                    <textarea name="contenido" maxlength="3000" [(ngModel)]="notaEditar.body" placeholder="Escribe tu nota aqui..."
                         id="contenido-update" required class="form-control"
                         style="max-height: 200px; height: 8em;">{{notaEditar.body}}</textarea>
                 </div>
@@ -109,7 +127,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p *ngIf="category" class="text-center">Categoria: <span class="badge bg-secondary fs-5">{{ category.name }}</span></p>
+                <div class="d-flex my-1 flex-wrap justify-content-around align-items-center p-1">
+                    <p *ngIf="category" class="text-center">Categoria: <span class="badge bg-secondary fs-5">{{ category.name }}</span></p>
+                    <p *ngIf="status" class="text-center">Status <span class="badge bg-secondary fs-5">{{ status.name }}</span></p>
+                </div>
                 <p class="my-2">{{ notaEditar.body }}</p>
 
             </div>
