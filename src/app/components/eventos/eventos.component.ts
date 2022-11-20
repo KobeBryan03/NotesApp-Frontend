@@ -27,7 +27,6 @@ export class EventosComponent implements OnInit {
       return;
     }
 
-
     this.evento.date = this.stringToDate(this.evento.date);
     this.eventService.create(this.evento).subscribe(data => {
       this.listaEventos.push(data);
@@ -63,7 +62,6 @@ export class EventosComponent implements OnInit {
       return;
     }
 
-
     this.eventoEditar.date = this.stringToDate(this.eventoEditar.date);
     this.eventService.update(this.eventoEditar).subscribe(data => {
       let index = this.listaEventos.findIndex(el => el.id === this.eventoEditar.id);
@@ -74,8 +72,6 @@ export class EventosComponent implements OnInit {
       this.infoUsuario = ["Fallo la edicion", "danger"];
     })
   }
-
-
 
   eliminar() {
     if (!this.eventoEditar.id) {
@@ -117,7 +113,7 @@ export class EventosComponent implements OnInit {
     return "";
   }
 
-  resetError(){
+  resetInfoUsuario(){
     this.infoUsuario = undefined;
   }
 

@@ -1,0 +1,53 @@
+<h1 class="text-center my-3">Registro de usuarios</h1>
+
+<!-- mensajes de error -->
+<div class="container my-2">
+    <div *ngIf="infoUsuario" class="alert alert-{{infoUsuario[1]}} d-flex flex-no-wrap justify-content-between align-items-center" role="alert">
+        <span>{{infoUsuario[0]}}</span>
+        <span class="btn" (click)="resetInfoUsuario()">X</span>
+    </div>
+</div>
+
+<div class="container">
+    <form action="">
+        <div class="form-group my-2">
+          <label for="names">Nombre</label>
+          <input type="text" [(ngModel)]="usuario.names" maxlength="30"
+            class="form-control" name="names" id="names" aria-describedby="helpId" placeholder="Ingresa un nombre">
+        </div>
+        <div class="form-group my-2">
+            <label for="lastNames">Apellido</label>
+            <input type="text" [(ngModel)]="usuario.lastNames" maxlength="30"
+              class="form-control" name="lastNames" id="lastNames" aria-describedby="helpId" placeholder="Ingresa un apellido">
+          </div>
+        <div class="form-group my-2">
+            <label for="email">Correo Electronico</label>
+            <input type="email"
+              class="form-control" [(ngModel)]="usuario.email" maxlength="50" name="email" id="email" aria-describedby="helpId" placeholder="Ingresa un nombre">
+          </div>
+          <div class="form-group my-2">
+            <label for="phoneNumber">Telefono</label>
+            <input type="number" [(ngModel)]="usuario.phoneNumber" max="999999999999" 
+              class="form-control" name="phoneNumber" id="phoneNumber" aria-describedby="helpId" placeholder="Ingresa un numero telefonico">
+          </div>
+          <div class="form-group my-2">
+            <label for="birthDate">Fecha Nacimiento</label>
+            <input type="date" [(ngModel)]="usuario.birthDate" class="form-control" name="birthDate" id="birthDate" aria-describedby="helpId" placeholder="Ingresa un apellido">
+          </div>
+          <div class="form-group my-2">
+            <label for="password1">Contraseña</label>
+            <input type="password" [(ngModel)]="usuario.password"axlength="15"
+              class="form-control" name="password1" id="password1" aria-describedby="helpId" placeholder="Ingresa un apellido">
+          </div>
+          <div class="form-group my-2">
+            <label for="password2">Repetir Contraseña</label>
+            <input type="password"
+              class="form-control" maxlength="" [(ngModel)]="confirmPassword" name="password2" id="password2" aria-describedby="helpId" placeholder="Ingresa un apellido">
+          </div>
+          <div class="form-group my-2">
+            <button type="button" class="btn me-1 btn-primary" (click)="registrar()">Registrar</button>
+            <button type="reset" class="btn me-1">Limpiar</button>
+            <a href="/seguridad/login" class="link text-muted mx-1">¿Ya tienes cuenta inicia sesion?</a>
+          </div>
+    </form>
+</div>

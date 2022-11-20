@@ -3,6 +3,6 @@ export class Usuario{
     lastNames?: string
     email?: string
     phoneNumber?: string
-    birthDate?: Date
+    birthDate?: string
     password?: string
   }

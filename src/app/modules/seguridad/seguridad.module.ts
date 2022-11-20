@@ -6,12 +6,14 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { LogoutComponent } from './logout/logout.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RegistroComponent } from './registro/registro.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    RegistroComponent
   ],
   imports: [
     CommonModule,

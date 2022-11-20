@@ -121,7 +121,7 @@ export class NotasComponent implements OnInit {
     return parseInt(status.toString());
   }
 
-  resetError(){
+  resetInfoUsuario(){
     this.infoUsuario = undefined;
   }
 

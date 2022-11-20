@@ -40,11 +40,11 @@ export class LoginComponent implements OnInit {
     if(!email || email.length < 1) return "Debe ingresar un email";
     if(!password || password.length < 1) return "Debe ingresar un password";
     if(email.length < 7) "El email debe tener almenos 7 caracteres";
-    if(!email.match(/[a-zA-Z-0-9._]{3,20}@[a-z]{2,12}\.[a-z]{3,20}\.[a-z]{2,5}?/)) return "El email no es valido"
+    if(!email.match(/[a-zA-Z-0-9._]{3,20}@[a-z]{2,12}\.[a-z]{3,20}\.?([a-z]{2,5})?/)) return "El email no es valido"
     return "";
    }
 
-   resetError(){
+   resetInfoUsuario(){
     this.infoUsuario = undefined;
    }
 
